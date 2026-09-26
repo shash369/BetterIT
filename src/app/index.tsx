@@ -1,18 +1,16 @@
-import { Pressable, Text, View } from "react-native";
-import '../../global.css'
-import { router } from "expo-router";
+import { View, Text, Pressable } from 'react-native'
+import React from 'react'
+import { router } from 'expo-router'
 
-export default function Index() {
+export default function index() {
   return (
     <View>
-      <Text className="text-xl font-bold text-blue-500">
-        Welcome to <Text className="text-red-300">BetterIT</Text> 
-      </Text>
+      <Text>index from the src/app</Text>
 
 
-      <Pressable onPress={() => router.push("/info")}>
-        <Text>Go to Info</Text>
+      <Pressable onPress={()=>router.push('/(tabs)')}>
+        <Text className='text-violet-500 border-4 border-red-200'> go to the tabs section</Text>
       </Pressable>
     </View>
-  );
+  )
 }
