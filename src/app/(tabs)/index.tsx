@@ -9,9 +9,9 @@ export default function Index() {
       </Text>
 
 
-      <Pressable onPress={()=>router.push('/login')}>
+      <Pressable className="p-3 border-3 border-lime-400 border-r-2" onPress={()=>router.push('/login')}>
         <Text>
-           go to the login page
+           go to the login page 
         </Text>
       </Pressable>
     </View>
