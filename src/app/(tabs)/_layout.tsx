@@ -10,3 +10,45 @@ export default function TabsLayout() {
     </Tabs>
   )
 }
+
+//todo:style to set after the setup
+/*
+<Tabs
+  screenOptions={{
+    headerShown: false,
+
+    tabBarActiveTintColor: "#89CFF0",
+    tabBarInactiveTintColor: "#ffffff",
+
+    tabBarStyle: {
+      position: "absolute",
+      bottom: 20,
+      left: 20,
+      right: 20,
+
+      height: 65,
+      borderRadius: 35,
+
+      backgroundColor: "#800020",
+
+      borderTopWidth: 0,
+
+      elevation: 6,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowOpacity: 0.15,
+      shadowRadius: 8,
+    },
+
+    tabBarItemStyle: {
+      borderRadius: 20,
+      alignContent:"center",
+      justifyContent:"center",
+      marginTop:"auto"
+    },
+  }}
+>
+*/
