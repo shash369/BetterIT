@@ -6,6 +6,8 @@ import {
 } from 'react-native';
 import { Button, Text, TextInput } from 'react-native-paper';
 import React, { useState } from 'react';
+import { UseAuth } from '../../lib/auth-context';
+import { router, useRoute } from 'expo-router';
 
 export default function AuthScreen() {
   const [isSignUP, setIsSignUp] = useState<boolean>(false);
@@ -13,10 +15,15 @@ export default function AuthScreen() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const route=useRoute();
+
   // const [error,setError]=useState<boolean>(false);
   // const [errorMessage,setErrorMessage]=useState<string>();
 
   const [error, setError] = useState<string | null>(null);
+
+
+  const {signIn,signUp}=UseAuth();
 
   const handleSwitchMode = () => {
     setIsSignUp((prev) => !prev);
@@ -28,17 +35,35 @@ export default function AuthScreen() {
     return emailRegex.test(email);
   };
 
-  const handleAuth = async () => {
-        if (!email.trim() || !password.trim()) {
-          setError("All fields are required")
-          return;
-        }
-        if(!isValidEmail(email)){
-          setError("Please Enter a valid Email")
-          return;
-        }
-        setError(null);
-  };
+    const handleAuth = async () => {
+      const normalizedEmail = email.trim();
+
+      if (!normalizedEmail || !password) {
+        setError("All fields are required");
+        return;
+      }
+
+      if (!isValidEmail(normalizedEmail)) {
+        setError("Please enter a valid email address");
+        return;
+      }
+
+      if (isSignUP && password.length < 8) {
+        setError("Password must be at least 8 characters long");
+        return;
+      }
+
+      setError(null);
+
+      const authError = isSignUP?await signUp(normalizedEmail, password):await signIn(normalizedEmail, password);
+
+      if (authError !== null) {
+        setError(authError);
+        return;
+      }
+
+      router.replace("/");
+    };
 
   return (
     <KeyboardAvoidingView
